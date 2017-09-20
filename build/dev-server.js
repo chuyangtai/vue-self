@@ -72,20 +72,20 @@ aipRoutes.get('/seller',function (req,res) {
   });
 });
 
-aipRoutes.get('/good',function (req,res) {
+aipRoutes.get('/goods',function (req,res) {
   res.json({
     errno:0,
     data:seller.goods
   });
 });
 
-aipRoutes.get('/rating',function (req,res) {
+aipRoutes.get('/ratings',function (req,res) {
   res.json({
     errno:0,
     data:seller.ratingContent
   });
 });
-app.use('/',aipRoutes);
+app.use('/api',aipRoutes);
 
 // serve pure static assets
 var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
