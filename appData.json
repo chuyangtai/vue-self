@@ -1,7 +1,8 @@
 {
   "seller": {
     "name": "钱家大食堂（回龙观）",
-    "discription": "蜂鸟专送",
+    "sellerHeaderImg": "https://fuss10.elemecdn.com/f/48/226c6e26d7398ddfd3821f638c2efjpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85",
+    "description": "蜂鸟专送",
     "deliveryTime": 38,
     "score": 4.2,
     "serviceScore": 4.3,
@@ -41,15 +42,65 @@
         "ratingCount": 100,
         "ratingContents": [
           {
-            "username":"3***e",
-            "rateTime":146928196400,
-            "deliveryTime":30,
-            "score":5,
-            "rateType":0,
-            "text":"还可以",
-            "recommends":[
-                "娃娃菜炖豆腐",
-                "铁板牛肉"
+            "username": "3***e",
+            "rateTime": 146928196400,
+            "deliveryTime": 30,
+            "score": 5,
+            "rateType": 0,
+            "text": "还可以",
+            "recommends": [
+              "娃娃菜炖豆腐",
+              "铁板牛肉"
+            ]
+          }
+        ],
+        "icon": "https://fuss10.elemecdn.com/9/38/a45cfc8e8ada3b7ba3d8dd33cecfejpeg.jpeg?imageMogr2/thumbnail/100x100/format/webp/quality/85",
+        "image": "https://fuss10.elemecdn.com/9/38/a45cfc8e8ada3b7ba3d8dd33cecfejpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/85"
+      },
+      {
+        "name": "米饭",
+        "type": 1,
+        "direction": "微酸微辣 超级热销哦～",
+        "sellCount": 2775,
+        "price": 5,
+        "rating": 4.2,
+        "ratingCount": 100,
+        "ratingContents": [
+          {
+            "username": "3***e",
+            "rateTime": 146928196400,
+            "deliveryTime": 30,
+            "score": 5,
+            "rateType": 0,
+            "text": "还可以",
+            "recommends": [
+              "娃娃菜炖豆腐",
+              "娃娃菜豆腐"
+            ]
+          }
+        ],
+        "icon": "https://fuss10.elemecdn.com/9/38/a45cfc8e8ada3b7ba3d8dd33cecfejpeg.jpeg?imageMogr2/thumbnail/100x100/format/webp/quality/85",
+        "image": "https://fuss10.elemecdn.com/9/38/a45cfc8e8ada3b7ba3d8dd33cecfejpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/85"
+      },
+      {
+        "name": "铁板牛肉",
+        "type": 1,
+        "direction": "微酸微辣 超级热销哦～",
+        "sellCount": 2775,
+        "price": 5,
+        "rating": 4.2,
+        "ratingCount": 100,
+        "ratingContents": [
+          {
+            "username": "3***e",
+            "rateTime": 146928196400,
+            "deliveryTime": 30,
+            "score": 5,
+            "rateType": 0,
+            "text": "还可以",
+            "recommends": [
+              "娃娃菜炖豆腐",
+              "娃娃菜豆腐"
             ]
           }
         ],

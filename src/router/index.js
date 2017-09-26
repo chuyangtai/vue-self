@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Hello from '@/components/Hello';
 import Goods from '@/goods/goods.vue';
 import Ratings from '@/ratings/ratings.vue';
 import Seller from '@/seller/seller.vue';
@@ -12,8 +11,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Hello',
-      component: Hello
+      name: 'Index',
+      component: Goods
     },
     {
       path: '/goods',

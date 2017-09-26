@@ -19,17 +19,7 @@
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-align: center;
     color: #2c3e50;
   }
-  .tab{
-    display: flex;
-    width: 100%;
-    height: 40px;
-    line-height:40px;
-  }
-  .tab-item{
-    flex:1;
-    text-align: center;
-  }
+
 </style>
