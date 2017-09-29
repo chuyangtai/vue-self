@@ -1,7 +1,7 @@
 <template>
     <div class="star" :class="starType">
-      <span v-for="itemClass in itemClasses" class="star-item" :class="itemClass">
-      </span>
+        <span v-for="itemClass in itemClasses" class="star-item" :class="itemClass">
+        </span>
     </div>
 </template>
 

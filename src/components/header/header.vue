@@ -30,31 +30,34 @@
         <router-link :to="{path:'seller',activeClass: 'active'}">商家</router-link>
       </div>
     </div>
-    <div class="detail" v-show="detailShow">
-      <div class="detail-wrapper clearfix">
-        <div class="detail-main">
-          <h4 class="detail-seller-name">{{seller.name}}</h4>
-          <star :size="48" :score="seller.score"></star>
-          <div class="title">
-            <div class="line"></div>
-            <div class="text text-center">优惠信息</div>
-            <div class="line"></div>
-          </div>
-          <div class="discount-info">
-            <p v-for="d in seller.discount">{{d.description}}</p>
-          </div>
-          <div class="title">
-            <div class="line"></div>
-            <div class="text text-center">商家公告</div>
-            <div class="line"></div>
-          </div>
-          <div class="detail-bulletin">
-            <p v-text="seller.bulletin"></p>
+    <transition name="fade">
+      <div class="detail" v-show="detailShow">
+        <div class="detail-wrapper clearfix">
+          <div class="detail-main">
+            <h4 class="detail-seller-name">{{seller.name}}</h4>
+            <star :size="48" :score="seller.score"></star>
+            <div class="title">
+              <div class="line"></div>
+              <div class="text text-center">优惠信息</div>
+              <div class="line"></div>
+            </div>
+            <div class="discount-info">
+              <p v-for="d in seller.discount">{{d.description}}</p>
+            </div>
+            <div class="title">
+              <div class="line"></div>
+              <div class="text text-center">商家公告</div>
+              <div class="line"></div>
+            </div>
+            <div class="detail-bulletin">
+              <p v-text="seller.bulletin"></p>
+            </div>
           </div>
         </div>
+        <div class="detail-close" @click="hideDetail">关闭</div>
       </div>
-      <div class="detail-close" @click="hideDetail">关闭</div>
-    </div>
+    </transition>
+
   </div>
 </template>
 
@@ -88,19 +91,23 @@
 </script>
 
 <style>
+
   .header {
     height: 20px;
   }
-  .tab{
+
+  .tab {
     display: flex;
     width: 100%;
     height: 40px;
-    line-height:40px;
+    line-height: 40px;
   }
-  .tab-item{
-    flex:1;
+
+  .tab-item {
+    flex: 1;
     text-align: center;
   }
+
   .active {
     background-color: #42b983;
   }
@@ -122,63 +129,100 @@
     text-align: left;
 
   }
-  .banner-top img{padding: 24px;box-sizing: content-box;border-radius: 2px}
-  .banner-top .seller-infor{padding: 28px 0 0 12px;}
+
+  .banner-top img {
+    padding: 24px;
+    box-sizing: content-box;
+    border-radius: 2px
+  }
+
+  .banner-top .seller-infor {
+    padding: 28px 0 0 12px;
+  }
+
   .seller-name {
     color: #fff;
     font-size: 16px;
     font-weight: 600;
   }
-  .bulletin{margin-bottom: 0px;}
-  .detail{
-    position: fixed;
-    z-index:100;
-    width:100%;
-    height:100%;
-    overflow: auto;
-    background: rgba(7,17,27,0.8);
-    top:0;
-    left: 0;
-    color:#fff;
+
+  .bulletin {
+    margin-bottom: 0px;
   }
-  .detail-wrapper{
+
+  .detail {
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: rgba(7, 17, 27, 0.8);
+    top: 0;
+    left: 0;
+    color: #fff;
+    transition:all 0.3s;
+  }
+  .fade-enter-active, .fade-leave-active {
+    opacity: 1;
+    background: rgba(7, 17, 27, 0.8);
+  }
+  .fade-enter, .fade-leave-active {
+    background: rgba(7, 17, 27, 0);
+    opacity: 0
+  }
+
+  .detail-wrapper {
     min-height: 100%;
     width: 100%;
   }
-  .detail-main{
-    margin-top:64px;
-    padding-bottom:64px;
+
+  .detail-main {
+    margin-top: 64px;
+    padding-bottom: 64px;
   }
-  .detail-close{
+
+  .detail-close {
     position: relative;
-    width:32px;
-    height:32px;
-    margin:-64px auto 0 auto;
-    clear:both;
+    width: 32px;
+    height: 32px;
+    margin: -64px auto 0 auto;
+    clear: both;
 
   }
-  .detail-seller-name{
-    line-height:16px;
+
+  .detail-seller-name {
+    line-height: 16px;
     font-size: 16px;
     font-weight: 700;
     text-align: center;
   }
-  .line{
-    flex:1;
+
+  .line {
+    flex: 1;
     position: relative;
-    top:-6px;
-    border-bottom:1px solid rgba(255,255,255,0.2);
+    top: -6px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   }
-  .title{
+
+  .title {
     display: flex;
     font-size: 14px;
     width: 80%;
     margin: 30px auto 24px auto;
   }
-  .text{
+
+  .text {
     line-height: 14px;
     padding: 0 8px;
     font-size: 14px;
   }
-  .discount-info,.detail-bulletin{padding: 0 30px}
+
+  .discount-info, .detail-bulletin {
+    padding: 0 30px
+  }
+
+  .detail-bulletin {
+    font-size: 12px;
+    line-height: 24px
+  }
 </style>
