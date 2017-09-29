@@ -30,25 +30,44 @@
         <router-link :to="{path:'seller',activeClass: 'active'}">商家</router-link>
       </div>
     </div>
-    <div class="detail" v-show="detailShow" @click="hideDetail">
+    <div class="detail" v-show="detailShow">
       <div class="detail-wrapper clearfix">
         <div class="detail-main">
-
+          <h4 class="detail-seller-name">{{seller.name}}</h4>
+          <star :size="48" :score="seller.score"></star>
+          <div class="title">
+            <div class="line"></div>
+            <div class="text text-center">优惠信息</div>
+            <div class="line"></div>
+          </div>
+          <div class="discount-info">
+            <p v-for="d in seller.discount">{{d.description}}</p>
+          </div>
+          <div class="title">
+            <div class="line"></div>
+            <div class="text text-center">商家公告</div>
+            <div class="line"></div>
+          </div>
+          <div class="detail-bulletin">
+            <p v-text="seller.bulletin"></p>
+          </div>
         </div>
       </div>
-      <div class="detail-close"></div>
+      <div class="detail-close" @click="hideDetail">关闭</div>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  module.exports = {
+  import star from '../start/start.vue';
+  export default{
     data: function () {
       return {
         seller: {},
         detailShow: false
       };
     },
+    components: {star},
     methods: {
       showDetail () {
         this.detailShow = true;
@@ -120,13 +139,46 @@
     background: rgba(7,17,27,0.8);
     top:0;
     left: 0;
-
+    color:#fff;
   }
   .detail-wrapper{
     min-height: 100%;
+    width: 100%;
   }
   .detail-main{
     margin-top:64px;
-    padding-bottom:64px ;
+    padding-bottom:64px;
   }
+  .detail-close{
+    position: relative;
+    width:32px;
+    height:32px;
+    margin:-64px auto 0 auto;
+    clear:both;
+
+  }
+  .detail-seller-name{
+    line-height:16px;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+  }
+  .line{
+    flex:1;
+    position: relative;
+    top:-6px;
+    border-bottom:1px solid rgba(255,255,255,0.2);
+  }
+  .title{
+    display: flex;
+    font-size: 14px;
+    width: 80%;
+    margin: 30px auto 24px auto;
+  }
+  .text{
+    line-height: 14px;
+    padding: 0 8px;
+    font-size: 14px;
+  }
+  .discount-info,.detail-bulletin{padding: 0 30px}
 </style>
