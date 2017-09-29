@@ -161,6 +161,7 @@
     left: 0;
     color: #fff;
     transition:all 0.3s;
+    backdrop-filter:blur(10px);
   }
   .fade-enter-active, .fade-leave-active {
     opacity: 1;
