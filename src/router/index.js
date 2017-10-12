@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Goods from '@/goods/goods.vue';
-import Ratings from '@/ratings/ratings.vue';
-import Seller from '@/seller/seller.vue';
+import Goods from '@/components/goods/goods.vue';
+import Ratings from '@/components/ratings/ratings.vue';
+import Seller from '@/components/seller/seller.vue';
 
 Vue.use(Router);
 

@@ -62,7 +62,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import star from '../start/start.vue';
+  import star from '../star/start.vue';
   export default{
     data: function () {
       return {
@@ -120,6 +120,7 @@
   .banner {
     background: url(../../assets/seller-bg.jpg) no-repeat center;
     color: #fff;
+    height: 140px;
   }
 
   .brand {
@@ -131,13 +132,13 @@
   }
 
   .banner-top img {
-    padding: 24px;
+    padding: 20px;
     box-sizing: content-box;
     border-radius: 2px
   }
 
   .banner-top .seller-infor {
-    padding: 28px 0 0 12px;
+    padding: 20px 0 0 0px;
   }
 
   .seller-name {
@@ -148,6 +149,7 @@
 
   .bulletin {
     margin-bottom: 0px;
+    font-size: 12px;
   }
 
   .detail {

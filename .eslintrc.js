@@ -26,6 +26,7 @@ module.exports = {
     // 双峰驼命名格式
     "camelcase": 2,
     "semi": ['error', "always"],
-    "indent":0
+    "indent":0,
+    "no-unused-vars": 0
   }
 };
