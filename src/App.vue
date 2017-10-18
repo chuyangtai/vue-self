@@ -1,15 +1,31 @@
 <template>
   <div id="app">
-    <v-header></v-header>
-    <router-view></router-view>
+    <v-header :seller="seller"></v-header>
+    <router-view :seller="seller"></router-view>
   </div>
 </template>
 
 <script>
   import header from './components/header/header.vue';
   export default {
+    data () {
+      return {
+        seller: {}
+      };
+    },
     components: {
       'v-header': header
+    },
+    created: function () {
+      this.axios.get('/api/seller').then((response) => {
+        console.log(response);
+        if (response.data.errno === 0) {
+          this.seller = response.data.data;
+        }
+      });
+    },
+    mounted () {
+      console.log(this.goods);
     }
   };
 </script>

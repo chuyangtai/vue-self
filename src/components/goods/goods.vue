@@ -31,20 +31,23 @@
           </li>
         </ul>
       </div>
-      <div></div>
+      <shop-cart :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shop-cart>
     </div>
 
 </template>
 
 <script type="text/ecmascript-6">
+import shopCart from '../shopcart/shopcart.vue';
 
 const ERR_OK = 0;
 
 export default{
   props: {
     seller: {
-      type: Object
     }
+  },
+  components: {
+    shopCart
   },
   data () {
     return {
@@ -60,9 +63,6 @@ export default{
     .catch(function (error) {
       console.log(error);
     });
-  },
-  mounted () {
-    console.log(this.goods);
   }
 };
 </script>

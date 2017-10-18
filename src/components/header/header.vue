@@ -57,16 +57,17 @@
         <div class="detail-close" @click="hideDetail">关闭</div>
       </div>
     </transition>
-
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import star from '../star/start.vue';
   export default{
+    props: {
+        seller: {}
+    },
     data: function () {
       return {
-        seller: {},
         detailShow: false
       };
     },
@@ -78,14 +79,6 @@
       hideDetail () {
         this.detailShow = false;
       }
-    },
-    created: function () {
-      this.axios.get('/api/seller').then((response) => {
-        console.log(response);
-        if (response.data.errno === 0) {
-          this.seller = response.data.data;
-        }
-      });
     }
   };
 </script>
