@@ -7,6 +7,7 @@
 
 <script>
   import header from './components/header/header.vue';
+  import CustomScrollbar from './directive/scroll.directive';
   export default {
     data () {
       return {
