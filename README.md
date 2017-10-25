@@ -1,4 +1,4 @@
-#仿饿了么实战代码
+# 仿饿了么实战代码
 # vue-self
 
 > vue2.0 for sell like elem app
