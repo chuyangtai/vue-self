@@ -14,6 +14,9 @@
         </div>
       </div>
     </div>
+    <div class="ball-container">
+      <div v-for="ball in balls" class="ball"></div>
+    </div>
 	</div>
 
 </template>
@@ -35,6 +38,23 @@
         }
        }
       },
+    methods: {
+      drop (el) {
+        console.log(el);
+      }
+    },
+    data () {
+      return {
+        balls: [
+          {show: false},
+          {show: false},
+          {show: false},
+          {show: false},
+          {show: false}
+        ],
+        dropBall: []
+      };
+    },
     computed: {
         totlePrice () {
           let total = 0;
@@ -71,6 +91,20 @@
   z-index 50
   width 100%
   background-color: #141d27
+  .ball-container
+    .ball
+      position fixed
+      left 32px
+      bottom 22px
+      z-index 200
+      &.drop
+        transition all 0.4s
+        inner
+          width 16px
+          height 16px
+          border-radius 50%
+          background rgb(0,160,220)
+          transition all 0.4s
   .content
     display flex
     background: #141d27
@@ -135,6 +169,5 @@
           color #fff
         &.enough
           background-color #42b983
-
 
 </style>

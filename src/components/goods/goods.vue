@@ -5,7 +5,7 @@
           <li v-for="item in goods" class="menu-item"><span>{{item.name}}</span></li>
         </ul>
       </div>
-      <div class="foods-wrapper" v-CustomScrollbar>
+      <div class="foods-wrapper">
         <ul>
           <li v-for="item in goods" class="food-list">
             <h1 class="title">{{item.name}}</h1>
@@ -16,7 +16,6 @@
                 </div>
                 <div class="content">
                   <h2 class="name">{{food.name}}</h2>
-                  <p class="description">{{food.description}}</p>
                   <div class="extra">
                     <span class="count">月售{{food.sellCount}}</span>
                     <span class="rating">好评率{{food.rating}}%</span>
@@ -25,19 +24,22 @@
                     <span class="now">￥{{food.price}}</span>
                     <span class="old" v-show="food.oldPrice">{{food.oldPrice}}</span>
                   </div>
+                  <div class="cart-control-wrapper">
+                    <cartControl :food="food" @addElem="_drop"></cartControl>
+                  </div>
                 </div>
               </li>
             </ul>
           </li>
         </ul>
       </div>
-      <shop-cart :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shop-cart>
+      <shop-cart ref="shopCart" :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shop-cart>
     </div>
-
 </template>
 
 <script type="text/ecmascript-6">
 import shopCart from '../shopcart/shopcart.vue';
+import cartControl from '../cartcontrol/cartcontrol.vue';
 
 const ERR_OK = 0;
 
@@ -47,7 +49,14 @@ export default{
     }
   },
   components: {
-    shopCart
+    shopCart,
+    cartControl
+  },
+  methods: {
+      // 调用子组件shopCart的方法
+    _drop (el) {
+      this.$refs.shopCart.drop(el);
+    }
   },
   data () {
     return {
@@ -68,6 +77,11 @@ export default{
 </script>
 
 <style>
+.cart-control-wrapper{
+  position:absolute;
+  right: 0;
+  bottom:2px;
+}
 .goods{
   display: flex;
   position: absolute;
@@ -126,7 +140,8 @@ export default{
   margin-right: 10px;
 }
 .content{
-   flex:1
+   flex:1;
+  position: relative;
   }
 .content .name{
   margin: 2px 0 8px 0;
@@ -138,14 +153,16 @@ export default{
   margin-bottom:8px;
   font-size: 10px;
   line-height: 10px;
-  color: rgba(147,153,159);
+  color: rgba(147,153,159,0.8);
 }
 .extra{
   line-height:10px;
   font-size: 10px;
+  color: #878787;
+  margin-bottom:8px;
 }
 .extra .count{
-  margin-right:12px;
+  margin-right:8px;
 }
   .price{
     font-weight:700;
