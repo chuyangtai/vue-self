@@ -16,6 +16,7 @@
     },
     methods: {
       cartAdd (event) {
+        // 防止多次点击？
         if (!this.food.count) {
           Vue.set(this.food, 'count', 1);
         } else {

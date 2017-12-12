@@ -33,7 +33,7 @@
           </li>
         </ul>
       </div>
-      <shop-cart ref="shopCart" :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shop-cart>
+      <shop-cart ref="shopCart" :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice" :selectFoods="selectFoods"></shop-cart>
     </div>
 </template>
 
@@ -75,6 +75,19 @@ export default{
     .catch(function (error) {
       console.log(error);
     });
+  },
+  computed: {
+      selectFoods () {
+        let foods = [];
+        this.goods.forEach((good) => {
+          good.foods.forEach((food) => {
+            if (food.count > 0) {
+              foods.push(food);
+            }
+          });
+        });
+        return foods;
+      }
   }
 };
 </script>

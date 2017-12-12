@@ -37,9 +37,10 @@
           default: 0
         },
       selectFoods: {
+        type: Array,
         default () {
             return [
-              {price: 2.9, count: 10}
+              {price: 0, count: 0}
             ];
         }
        }
