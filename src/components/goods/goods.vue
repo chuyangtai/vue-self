@@ -53,9 +53,12 @@ export default{
     cartControl
   },
   methods: {
-      // 调用子组件shopCart的方法
+      // 调用 子组件shopCart的方法
     _drop (el) {
-      this.$refs.shopCart.drop(el);
+        // 异步执行动画，优化下落动画体验
+        this.$nextTick(() => {
+          this.$refs.shopCart.drop(el);
+        });
     }
   },
   data () {
