@@ -79,20 +79,22 @@
     computed: {
       selectFoods () {
         let foods = [];
-        this.goods.forEach((good) => {
-          good.foods.forEach((food) => {
-            if (food.count > 0) {
-              foods.push(food);
-            }
+        if (this.goods.length > 0) {
+          this.goods.forEach((good) => {
+            good.foods.forEach((food) => {
+              if (food.count > 0) {
+                foods.push(food);
+              }
+            });
           });
-        });
+        }
         return foods;
       }
     }
   };
 </script>
 
-<style>
+<style scoped>
   .cart-control-wrapper {
     position: absolute;
     right: 0;

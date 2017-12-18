@@ -1,50 +1,56 @@
 <template>
-  <div class="shopcart" @click="listShow=!listShow">
-    <div class="content">
-      <div class="content-left">
-        <div class="logo" :class="{'highlight':totleCount > 0}">
-          <img src="../../assets/logo.png" alt="" width="46">
-          <span class="number" v-show="totleCount>0">{{totleCount}}</span>
-        </div>
-        <div class="price">￥{{totlePrice}}</div>
-        <div class="describe">另需配送费￥{{deliveryPrice}}元</div>
-      </div>
-      <div class="content-right">
-        <div class="pay" :class="{'highlight':totlePrice > 0,'enough':totlePrice >= minPrice}">{{payDesc}}
-        </div>
-      </div>
-    </div>
-    <!--小球掉落-->
-    <div class="ball-container">
-      <div v-for="ball in balls">
-        <transition name="dropBall" @before-enter="beforeEnter" @enter="enter" @afterEnter="afterEnter">
-          <div class="ball" v-show="ball.show">
-            <div class="inner inner-hook"></div>
+  <div class="shopcartall">
+    <div class="shopcart" @click="listShow=true">
+      <div class="content">
+        <div class="content-left">
+          <div class="logo" :class="{'highlight':totleCount > 0}">
+            <img src="../../assets/logo.png" alt="" width="46">
+            <span class="number" v-show="totleCount > 0">{{totleCount}}</span>
           </div>
-        </transition>
+          <div class="price">￥{{totlePrice}}</div>
+          <div class="describe">另需配送费￥{{deliveryPrice}}元</div>
+        </div>
+        <div class="content-right">
+          <div class="pay" :class="{'highlight':totlePrice > 0,'enough':totlePrice >= minPrice}">{{payDesc}}
+          </div>
+        </div>
       </div>
-    </div>
-    <!--购物车展开详情-->
-    <transition name="cartFold">
-      <div class="shopcart-list" v-show="listShow">
+      <!--小球掉落-->
+      <div class="ball-container">
+        <div v-for="ball in balls">
+          <transition name="dropBall" @before-enter="beforeEnter" @enter="enter" @afterEnter="afterEnter">
+            <div class="ball" v-show="ball.show">
+              <div class="inner inner-hook"></div>
+            </div>
+          </transition>
+        </div>
+      </div>
+      <!--购物车展开详情-->
+      <transition name="cartFold">
+        <div class="shopcart-list" v-show="listShow">
           <div class="list-header">
             <h1 class="title">购物车</h1>
-            <span class="empty">清空</span>
+            <span class="empty" @click="empty()">清空</span>
           </div>
           <div class="list-content">
-            <ul>
+            <ul class="list-ul">
               <li class="food" v-for="food in selectFoods">
                 <span class="name">{{food.name}}</span>
                 <div class="price">
                   <span>{{food.price * food.count}}</span>
                 </div>
                 <div class="cartcontrol-wrapper">
-                  <cartcontrol :food="food"></cartcontrol>
+                  <cartControl :food="food" @addElem="drop"></cartControl>
                 </div>
               </li>
             </ul>
           </div>
-      </div>
+        </div>
+      </transition>
+    </div>
+    <!--详情弹出，背景模糊-->
+    <transition name="backgroundFade">
+      <div class="list-mask" v-show="listMask"></div>
     </transition>
   </div>
 </template>
@@ -69,6 +75,11 @@
       }
     },
     methods: {
+      empty () {
+        this.selectFoods.forEach((food) => {
+            food.count = 0;
+        });
+      },
       drop (el) {
         // 可以得到这个点击元素
         // console.log(el)
@@ -132,7 +143,8 @@
           {show: false}
         ],
         dropBalls: [],
-        listShow: false
+        listShow: false,
+        listMask: false
       };
     },
     computed: {
@@ -166,7 +178,17 @@
   };
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
+.shopcartall
+  .list-mask
+    position: fixed
+    top 0
+    left 0
+    width 100%
+    height 100%
+    z-index 60
+    backdrop-filter:blur(10px)
+
   .shopcart
     position fixed
     left 0
@@ -191,7 +213,7 @@
       width 100%
       position absolute
       left 0
-      top -48px
+      bottom 48px
       z-index -1
       color #fff
       transition all 0.5s
@@ -212,11 +234,34 @@
           font-size 12px
           color: rgb(0,160,220)
           line-height 40px
-        .list-content
-          padding 0 18px
-          max-height 217px
-          background: #fff
-          overflow hidden
+      .list-content
+        padding 0 18px
+        max-height 217px
+        background: #fff
+        overflow scroll
+        .list-ul
+          margin 0
+        .food
+          position relative
+          padding 12px 0
+          box-sizing border-box
+          border-bottom 1px solid #efefef
+          .name
+            line-height 24px
+            font-size 14px
+            color rgb(7,17,27)
+          .price
+            position absolute
+            right 90px
+            bottom 12px
+            line-height 24px
+            font-size 14px
+            font-weight 700
+            color #f00
+          .cartcontrol-wrapper
+            position: absolute;
+            right: 0;
+            bottom: 14px;
     .content
       display flex
       background: #141d27
@@ -283,11 +328,19 @@
             background-color #42b983
 
 </style>
-<style>
+<style scoped>
   .cartFold-enter-active, .cartFold-leave-active {
     opacity:1;
   }
   .cartFold-enter, .cartFold-leave-active {
     opacity:0;
+  }
+  .fadeBlur-enter-active,.fadeBlur-leave-active{
+    opacity:1;
+    background:rgba(7,17,27,0.6);
+  }
+  .fadeBlur-enter,.fadeBlur-leave-active{
+    opacity:1;
+    background:rgba(7,17,27,0.6);
   }
 </style>

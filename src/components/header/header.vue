@@ -83,7 +83,7 @@
   };
 </script>
 
-<style>
+<style scoped>
 
   .header {
     height: 20px;
@@ -221,4 +221,4 @@
     font-size: 12px;
     line-height: 24px
   }
-</style>
+</stylescoped>
