@@ -221,4 +221,4 @@
     font-size: 12px;
     line-height: 24px
   }
-</stylescoped>
+</style>

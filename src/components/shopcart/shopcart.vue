@@ -1,7 +1,7 @@
 <template>
   <div class="shopcartall">
-    <div class="shopcart" @click="listShow=true">
-      <div class="content">
+    <div class="shopcart">
+      <div class="content" @click="showDetail()">
         <div class="content-left">
           <div class="logo" :class="{'highlight':totleCount > 0}">
             <img src="../../assets/logo.png" alt="" width="46">
@@ -26,11 +26,14 @@
         </div>
       </div>
       <!--购物车展开详情-->
-      <transition name="cartFold">
+      <transition name="cartfold">
         <div class="shopcart-list" v-show="listShow">
           <div class="list-header">
             <h1 class="title">购物车</h1>
-            <span class="empty" @click="empty()">清空</span>
+            <div class="title-right">
+              <span class="empty" @click="empty()">清空</span>
+              <span class="closeDetail" @click="hideDetail()">关闭</span>
+            </div>
           </div>
           <div class="list-content">
             <ul class="list-ul">
@@ -58,6 +61,20 @@
 <script type="text/ecmascript-6">
   import cartControl from '../cartcontrol/cartcontrol.vue';
   export default{
+    data () {
+      return {
+        balls: [
+          {show: false},
+          {show: false},
+          {show: false},
+          {show: false},
+          {show: false}
+        ],
+        dropBalls: [],
+        listShow: false,
+        listMask: false
+      };
+    },
     props: {
       deliveryPrice: {
         default: 0
@@ -75,7 +92,19 @@
       }
     },
     methods: {
+      showDetail () {
+          if (this.selectFoods.length > 0) {
+            this.listShow = true;
+            this.listMask = true;
+          }
+      },
+      hideDetail () {
+          this.listShow = false;
+          this.listMask = false;
+      },
       empty () {
+        this.listShow = false;
+        this.listMask = false;
         this.selectFoods.forEach((food) => {
             food.count = 0;
         });
@@ -133,20 +162,6 @@
         }
       }
     },
-    data () {
-      return {
-        balls: [
-          {show: false},
-          {show: false},
-          {show: false},
-          {show: false},
-          {show: false}
-        ],
-        dropBalls: [],
-        listShow: false,
-        listMask: false
-      };
-    },
     computed: {
       totlePrice () {
         let total = 0;
@@ -181,14 +196,24 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 .shopcartall
   .list-mask
-    position: fixed
-    top 0
-    left 0
-    width 100%
-    height 100%
-    z-index 60
-    backdrop-filter:blur(10px)
-
+    position: fixed;
+    z-index: 30;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: rgba(7, 17, 27, 0.8);
+    top: 0;
+    left: 0;
+    color: #fff;
+    backdrop-filter:blur(10px);
+    &.fadeBlur-enter-active,&.fadeBlur-leave-active
+      transition:all 0.5s;
+      opacity:1;
+      background:rgba(7,17,27,0.6);
+    &.fadeBlur-enter,&.fadeBlur-leave-active
+      transition:all 0.5s;
+      opacity:0;
+      background:rgba(7,17,27,0);
   .shopcart
     position fixed
     left 0
@@ -216,8 +241,12 @@
       bottom 48px
       z-index -1
       color #fff
-      transition all 0.5s
-      transform translate3d(0,0,0)
+      &.cartfold-enter-active, .cartfold-leave-active
+        transition all 0.5s
+        translate3d(0,-100%,0)
+      &.cartfold-enter-active, .cartfold-leave-active
+        transition all 0.5s
+        translate3d(0,0,0)
       .list-header
         height: 40px
         padding 0 18px
@@ -229,11 +258,17 @@
           font-size 14px
           color rgb(7,17,27)
           margin 0
-        .empty
+        .title-right
           float right
-          font-size 12px
-          color: rgb(0,160,220)
-          line-height 40px
+          .empty
+            margin 0 15px 0 0px
+            font-size 12px
+            color: rgb(0,160,220)
+            line-height 40px
+          .closeDetail
+            font-size 12px
+            color rgb(0,160,220)
+            line-height 40px
       .list-content
         padding 0 18px
         max-height 217px
@@ -327,20 +362,4 @@
           &.enough
             background-color #42b983
 
-</style>
-<style scoped>
-  .cartFold-enter-active, .cartFold-leave-active {
-    opacity:1;
-  }
-  .cartFold-enter, .cartFold-leave-active {
-    opacity:0;
-  }
-  .fadeBlur-enter-active,.fadeBlur-leave-active{
-    opacity:1;
-    background:rgba(7,17,27,0.6);
-  }
-  .fadeBlur-enter,.fadeBlur-leave-active{
-    opacity:1;
-    background:rgba(7,17,27,0.6);
-  }
 </style>
